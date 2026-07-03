@@ -22,7 +22,9 @@ jobs:
           pip install pytest
 
       - name: Run Pytest
-        run: pytest -v
+        run: |
+          export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+          pytest -v
 
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
