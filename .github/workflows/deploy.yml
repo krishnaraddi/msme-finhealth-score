@@ -52,3 +52,11 @@ jobs:
             --region asia-south1 \
             --platform managed \
             --allow-unauthenticated
+
+      - name: Show Cloud Run URL
+        run: |
+          gcloud run services describe msme-score \
+            --region asia-south1 \
+            --platform managed \
+            --format="value(status.url)"
+
