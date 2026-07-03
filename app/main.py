@@ -21,7 +21,7 @@ def read_root():
 @app.post("/score")
 def score(msme: MSMEData):
     """
-    Stub implementation: returns a synthetic score here.
+    Stub implementation: returns a synthetic score.
     Replace with LightGBM/XGBoost model inference later.
     """
     # Simple weighted average for demo purposes
