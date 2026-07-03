@@ -43,15 +43,18 @@ jobs:
           gcloud auth activate-service-account --key-file=${HOME}/gcp-key.json
           gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
-      # Step 6: Build and Deploy to Cloud Run
-      - name: Build and Deploy
+      - name: Build Image
         run: |
           gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/msme-score
+
+      - name: Deploy to Cloud Run
+        run: |
           gcloud run deploy msme-score \
             --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/msme-score \
             --region asia-south1 \
             --platform managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --quiet
 
       - name: Show Cloud Run URL
         run: |
@@ -59,4 +62,5 @@ jobs:
             --region asia-south1 \
             --platform managed \
             --format="value(status.url)"
+
 
